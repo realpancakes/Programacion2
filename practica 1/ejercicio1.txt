@@ -1,0 +1,59 @@
+import java.util.Random;
+
+class Cronometro {
+    private long inicia;
+    private long finaliza;
+    public Cronometro() {
+        this.inicia = System.currentTimeMillis();
+        this.finaliza = 0;
+    }
+    public void inicia() {
+        this.inicia = System.currentTimeMillis();
+        this.finaliza = 0;
+    }
+    public void detener() {
+        this.finaliza = System.currentTimeMillis();
+    }
+    public long lapsoDeTiempo() {
+        if (finaliza == 0) {
+            return System.currentTimeMillis() - inicia;
+        }
+        return finaliza - inicia;
+    }
+    public long getInicia() {
+        return inicia;
+    }
+    public long getFinaliza() {
+        return finaliza;
+    }
+}
+
+public class Main {
+    public static void ordenacionSeleccion(int[] lista) {
+        int n = lista.length;
+        for (int i = 0; i < n - 1; i++) {
+            int minimo = i;
+            for (int j = i + 1; j < n; j++) {
+                if (lista[j] < lista[minimo]) {
+                    minimo = j;
+                }
+            }
+            int temp = lista[i];
+            lista[i] = lista[minimo];
+            lista[minimo] = temp;
+        }
+    }
+    public static void main(String[] args) {
+        int[] numeros = new int[10000];  // Puedes cambiar a 100000 si deseas
+        Random random = new Random();
+        for (int i = 0; i < numeros.length; i++) {
+            numeros[i] = random.nextInt(1000000) + 1;
+        }
+        Cronometro cron = new Cronometro();
+        cron.inicia();
+        ordenacionSeleccion(numeros);
+        cron.detener();
+        System.out.println("Tiempo de ejecucion en milisegundos: " 
+                           + cron.lapsoDeTiempo());
+    }
+}

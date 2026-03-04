@@ -1,0 +1,54 @@
+import java.util.Scanner;
+class EcuacionCuadratica {
+    private double a;
+    private double b;
+    private double c;
+    public EcuacionCuadratica(double a, double b, double c) {
+        this.a = a;
+        this.b = b;
+        this.c = c;
+    }
+    public double getDiscriminante() {
+        return b * b - 4 * a * c;
+    }
+    public double getRaiz1() {
+        double d = getDiscriminante();
+        if (d >= 0) {
+            return (-b + Math.sqrt(d)) / (2 * a);
+        } else {
+            return 0;
+        }
+    }
+    public double getRaiz2() {
+        double d = getDiscriminante();
+        if (d >= 0) {
+            return (-b - Math.sqrt(d)) / (2 * a);
+        } else {
+            return 0;
+        }
+    }
+}
+public class Main {
+    public static void main(String[] args) {
+        Scanner entrada = new Scanner(System.in);
+        System.out.println("Ingrese a, b, c:");
+        double a = entrada.nextDouble();
+        double b = entrada.nextDouble();
+        double c = entrada.nextDouble();
+        EcuacionCuadratica ecuacion = new EcuacionCuadratica(a, b, c);
+        double discriminante = ecuacion.getDiscriminante();
+        if (discriminante > 0) {
+            System.out.println("La ecuacion tiene dos raices");
+            System.out.println("r1 = " + ecuacion.getRaiz1());
+            System.out.println("r2 = " + ecuacion.getRaiz2());
+        } 
+        else if (discriminante == 0) {
+            System.out.println("La ecuacion tiene una raiz");
+            System.out.println("r = " + ecuacion.getRaiz1());
+        } 
+        else {
+            System.out.println("La ecuacion no tiene raices reales");
+        }
+        entrada.close();
+    }
+}

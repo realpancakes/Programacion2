@@ -1,0 +1,31 @@
+import java.util.Scanner;
+public class EstadisticaModular {
+    public static double promedio(double[] valores) {
+        double suma = 0;
+        for (double v : valores) {
+            suma += v;
+        }
+        return suma / valores.length;
+    }
+    public static double desviacion(double[] valores) {
+        double prom = promedio(valores);
+        double suma = 0;
+        for (double v : valores) {
+            suma += Math.pow(v - prom, 2);
+        }
+        return Math.sqrt(suma / (valores.length - 1));
+    }
+    public static void main(String[] args) {
+        Scanner entrada = new Scanner(System.in);
+        double[] numeros = new double[10];
+        System.out.println("Ingrese 10 numeros:");
+        for (int i = 0; i < 10; i++) {
+            numeros[i] = entrada.nextDouble();
+        }
+        double prom = promedio(numeros);
+        double desv = desviacion(numeros);
+        System.out.printf("El promedio es %.2f\n", prom);
+        System.out.printf("La desviacion estandar es %.5f\n", desv);
+        entrada.close();
+    }
+}
